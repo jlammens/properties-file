@@ -28,6 +28,8 @@ export type InsertOptions = {
   comment?: string
   /** The comment's delimiter. */
   commentDelimiter?: CommentDelimiter
+  /** Escape special characters in values */
+  escapeValues?: boolean
 }
 
 /** Options on the `Properties.insertComment` method. */
@@ -54,6 +56,8 @@ export type UpdateOptions = {
   newComment?: string
   /** The comment's delimiter. */
   commentDelimiter?: CommentDelimiter
+  /** Escape special characters in values */
+  escapeValues?: boolean
 }
 
 /** Options on the `Properties.upsert` method. */
@@ -66,6 +70,8 @@ export type UpsertOptions = {
   comment?: string
   /** The comment's delimiter. */
   commentDelimiter?: CommentDelimiter
+  /** Escape special characters in values */
+  escapeValues?: boolean
 }
 
 /**
@@ -109,7 +115,7 @@ export class PropertiesEditor extends Properties {
     // Allow multiline values.
     const multilineValue = value
       .split(/\r?\n/)
-      .map((value) => escapeValue(value, escapeUnicode))
+      .map((value) => (options?.escapeValues === false ? value : escapeValue(value, escapeUnicode)))
       .join('\\\n')
 
     // Allow multiline comments.
@@ -293,7 +299,7 @@ export class PropertiesEditor extends Properties {
     // Allow multiline values.
     const multilineValue = (options.newValue ?? this.getValueWithNewlines(property))
       .split(/\r?\n/)
-      .map((value) => escapeValue(value, escapeUnicode))
+      .map((value) => (options?.escapeValues === false ? value : escapeValue(value, escapeUnicode)))
       .join('\\\n')
 
     // Allow multiline comments.
@@ -337,6 +343,7 @@ export class PropertiesEditor extends Properties {
           commentDelimiter: options?.commentDelimiter,
           separator: options?.separator,
           escapeUnicode: options?.escapeUnicode,
+          escapeValues: options?.escapeValues,
         })
       : this.insert(key, value, options)
   }
