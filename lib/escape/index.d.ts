@@ -12,7 +12,8 @@ export declare const escapeKey: (unescapedKey: string, escapeUnicode?: boolean) 
  *
  * @param unescapedValue - Property value to be escaped.
  * @param escapeUnicode - Escape unicode characters into ISO-8859-1 compatible encoding?
+ * @param escapeSpecial - Escape special characters ()=, :, # and !) ?
  *
  * @return The escaped value.
  */
-export declare const escapeValue: (unescapedValue: string, escapeUnicode?: boolean) => string;
+export declare const escapeValue: (unescapedValue: string, escapeUnicode?: boolean, escapeSpecial?: boolean) => string;

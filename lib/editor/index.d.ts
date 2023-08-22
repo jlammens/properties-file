@@ -22,7 +22,7 @@ export type InsertOptions = {
     /** The comment's delimiter. */
     commentDelimiter?: CommentDelimiter;
     /** Escape special characters in values */
-    escapeValues?: boolean;
+    escapeSpecial?: boolean;
 };
 /** Options on the `Properties.insertComment` method. */
 export type InsertCommentOptions = {
@@ -48,7 +48,7 @@ export type UpdateOptions = {
     /** The comment's delimiter. */
     commentDelimiter?: CommentDelimiter;
     /** Escape special characters in values */
-    escapeValues?: boolean;
+    escapeSpecial?: boolean;
 };
 /** Options on the `Properties.upsert` method. */
 export type UpsertOptions = {
@@ -61,7 +61,7 @@ export type UpsertOptions = {
     /** The comment's delimiter. */
     commentDelimiter?: CommentDelimiter;
     /** Escape special characters in values */
-    escapeValues?: boolean;
+    escapeSpecial?: boolean;
 };
 /**
  * A .properties file editor.

@@ -7,7 +7,7 @@
  * @return The escaped key.
  */
 export const escapeKey = (unescapedKey: string, escapeUnicode = false): string => {
-  return escapeContent(unescapedKey, true, escapeUnicode)
+  return escapeContent(unescapedKey, true, escapeUnicode, true)
 }
 
 /**
@@ -15,11 +15,16 @@ export const escapeKey = (unescapedKey: string, escapeUnicode = false): string =
  *
  * @param unescapedValue - Property value to be escaped.
  * @param escapeUnicode - Escape unicode characters into ISO-8859-1 compatible encoding?
+ * @param escapeSpecial - Escape special characters ()=, :, # and !) ?
  *
  * @return The escaped value.
  */
-export const escapeValue = (unescapedValue: string, escapeUnicode = false): string => {
-  return escapeContent(unescapedValue, false, escapeUnicode)
+export const escapeValue = (
+  unescapedValue: string,
+  escapeUnicode = false,
+  escapeSpecial = true
+): string => {
+  return escapeContent(unescapedValue, false, escapeUnicode, escapeSpecial)
 }
 
 /**
@@ -28,13 +33,15 @@ export const escapeValue = (unescapedValue: string, escapeUnicode = false): stri
  * @param unescapedContent - The content to escape.
  * @param escapeSpace - Escape spaces?
  * @param escapeUnicode - Escape unicode characters into ISO-8859-1 compatible encoding?
+ * @param escapeSpecial - Escape special characters ()=, :, # and !) ?
  *
  * @returns The unescaped content.
  */
 const escapeContent = (
   unescapedContent: string,
   escapeSpace: boolean,
-  escapeUnicode: boolean
+  escapeUnicode: boolean,
+  escapeSpecial: boolean
 ): string => {
   let escapedContent = ''
   for (
@@ -78,7 +85,7 @@ const escapeContent = (
       case '#':
       case '!': {
         // Escapes =, :, # and !.
-        escapedContent += `\\${character}`
+        escapedContent += escapeSpecial ? `\\${character}` : character
         break
       }
       default: {
