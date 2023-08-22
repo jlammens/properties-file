@@ -12,7 +12,7 @@ node_modules
 /coverage
 
 # Javascript (compiled) version
-/lib
+#/lib
 
 # Secrets
 .env
