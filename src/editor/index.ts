@@ -285,7 +285,7 @@ export class PropertiesEditor extends Properties {
     }
 
     const escapeUnicode = options.escapeUnicode || false
-    const escapeSpecial = options?.escapeSpecial || true
+    const escapeSpecial = !!options?.escapeSpecial
 
     const separator = options.separator
       ? options.separator === ' '
